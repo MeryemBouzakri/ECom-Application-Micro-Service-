@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.meryem</groupId>
-    <artifactId>confg-service</artifactId>
+    <artifactId>config-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>confg-service</name>
     <description>confg-service</description>
