@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ma.xproce.billingservice.model.Customer;
+
+import java.util.ArrayList;
 import java.util.Date;
 
 import java.util.List;
@@ -16,8 +18,16 @@ public class Bill {
     private Long id;
     private Date billDate;
     private Long customerId;
+    private BillStatus status;
     @OneToMany(mappedBy = "bill")
     private List <ProductItem>productItems;
     @Transient
     private Customer customer;
+public double getTotal() {
+    double somme = 0;
+    for(ProductItem pi: productItems) {
+        somme += pi.getAmount();
+    }
+    return somme;
+}
 }

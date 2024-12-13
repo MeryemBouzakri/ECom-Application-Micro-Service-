@@ -5,13 +5,13 @@ import ma.xproce.billingservice.repository.BillRepository;
 import ma.xproce.billingservice.repository.ProductItemRepository;
 import ma.xproce.billingservice.service.CustomerRestClient;
 import ma.xproce.billingservice.service.ProductRestClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class BillRestController {
-
     private BillRepository billRepository;
     private ProductItemRepository productItemRepository;
     private CustomerRestClient customerRestClient;
@@ -23,7 +23,7 @@ public class BillRestController {
         this.customerRestClient = customerRestClient;
         this.productItemRepository = productItemRepository;
     }
-    @GetMapping("/fullBill/{id}")
+    @GetMapping("/bills/{id}")
     public Bill bill(@PathVariable Long id) {
         Bill bill=billRepository.findById(id).get();
         bill.setCustomer(customerRestClient.findCustomerById(bill.getCustomerId()));

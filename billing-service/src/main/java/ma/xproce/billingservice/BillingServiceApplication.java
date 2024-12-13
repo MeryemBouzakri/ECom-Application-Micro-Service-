@@ -1,6 +1,7 @@
 package ma.xproce.billingservice;
 
 import ma.xproce.billingservice.entities.Bill;
+import ma.xproce.billingservice.entities.BillStatus;
 import ma.xproce.billingservice.entities.ProductItem;
 import ma.xproce.billingservice.model.Customer;
 import ma.xproce.billingservice.model.Product;
@@ -38,6 +39,7 @@ public class BillingServiceApplication {
             if(customer==null)throw new RuntimeException("Customer not found");
             Bill bill=new Bill();
             bill.setBillDate(new Date());
+            bill.setStatus(getRandomBillStatus());
             bill.setCustomerId(customerId);
             Bill savedBill=billRepository.save(bill);
             products.forEach(product->{
@@ -50,6 +52,12 @@ public class BillingServiceApplication {
                 productItemRepository.save(productItem);
             });
 
+
         };
 }
+    private BillStatus getRandomBillStatus() {
+        BillStatus[] statuses = BillStatus.values(); // Récupérer toutes les valeurs possibles
+        int randomIndex = new Random().nextInt(statuses.length); // Générer un index aléatoire
+        return statuses[randomIndex]; // Retourner une valeur aléatoire
+    }
 }
